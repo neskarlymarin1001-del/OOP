@@ -39,15 +39,16 @@ while True:
                 del myStudents[oldStudent]
 
     elif option == "3":
-        if len(myStudents) == 0:
-            print("The dictionary is empty")
+    if len(myStudents) == 0:
+        print("The dictionary is empty")
+    else:
+        oldStudent = input("Please provide the ID of the student you want to replace: ")
+        if oldStudent not in myStudents:
+            print("That student is not in the list")
         else:
-            oldStudent = input("Please provide the ID of the student you want to replace: ")
-            if oldStudent not in myStudents:
-                print("That student is not in the list")
-            else:
-                newStudent = input("Please provide the new ID you want to add: ")
-                myStudents[oldStudent]=newStudent
+            newStudent = input("Please provide the new ID you want to add: ")
+            myStudents[newStudent] = myStudents.pop(oldStudent)
+            print(f"Student ID {oldStudent} has been replaced with {newStudent}")
 
     elif option == "4":
         for student_record in myStudents.items():
@@ -56,6 +57,6 @@ while True:
 
     elif option == "5":
         break
+print("Thank you for using this program!")
 
-    print("Thank you for using this program!")
 
