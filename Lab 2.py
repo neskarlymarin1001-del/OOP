@@ -75,8 +75,10 @@ while True:
              print("------------------------------------")
 
     elif option == "5":
+        print("Thank you for using this program!")
         break
 
-    print("Thank you for using this program!")
+   
+
 
 
