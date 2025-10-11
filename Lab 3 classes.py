@@ -5,26 +5,29 @@ class Book:
         self.author = ""
         self.author_id = ""
         self.publisher = ""
-        self.year_of_publication = 0000
+        self.year_of_publication = 0
 
     def add_book(self):
         self.book_id = input("Enter the Book ID: ")
         self.book_title = input("Enter the Book Title: ")
-        self.author = input("Enter the Author: ")
+        self.publisher = input("Enter the Publisher: ")
+        self.year_of_publication = int(input("Enter the Year of Publication: "))
+        self.year_of_publication = 0
 
     def display_book(self):
         print("\nBook Information:")
         print("Book ID: ", self.book_id)
         print("Book Title: ", self.book_title)
         print("Author: ", self.author)
-
+        print("Publisher: ", self.publisher)
+        print("Year of Publication: ", self.year_of_publication)
 
 class User:
     def __init__(self):
         self.userID = ""
         self.userName = ""
         self.password = ""
-        self.address= ""
+        self.address = ""
         self.phone = ""
         self.email = ""
         self.books_borrowed = []
@@ -32,6 +35,7 @@ class User:
     def add_user(self):
         self.userID = input("Enter the User ID: ")
         self.userName = input("Enter the User Name: ")
+        self.password = input("Enter Password: ")
         self.address = input("Enter the User Address: ")
         self.phone = input("Enter the User Phone: ")
         self.email = input("Enter the User Email: ")
@@ -53,7 +57,8 @@ class User:
         else:
             print("Books borrowed:")
             for b in self.books_borrowed:
-                print(f" - {b.book_title} by {b.author}")
+                print(f"{b.book_title} by {b.author}")
+
 
 class Author:
     def __init__(self):
@@ -81,35 +86,81 @@ class Author:
         print("Phone: ", self.phone)
         print("Email: ", self.email_id)
 
-
 # Main Code
 
-# Create users and books
-b1 = Book()
-b2 = Book()
-b3 = Book()
+books = {}    
+authors = {}  
+users = {}    
 
-u1 = User()
-u2 = User()
-u3 = User()
+while True:
+    print("===== Welcome to the Library Management System =====")
+    print("1. Add Author")
+    print("2. Add Book")
+    print("3. Add User")
+    print("4. Borrow Book")
+    print("5. Display Authors")
+    print("6. Display Books")
+    print("7. Display Users")
+    print("8. Exit")
 
-# Add user info
-u1.add_user()
-u2.add_user()
+    choice = input("Enter your choice: ")
 
-# Add book info
-b1.add_book()
-b2.add_book()
-b3.add_book()
+    if choice == "1":
+        author = Author()
+        author.add_author()
+        authors[author.author_id] = author
+        print(f"Author '{author.author_name}' added successfully.")
 
+    elif choice == "2":
+        book = Book()
+        book.add_book()
+        author_id = input("Enter the Author ID for this book: ")
+        if author_id in authors:
+            book.author = authors[author_id].author_name
+            book.author_id = author_id
+            books[book.book_id] = book
+            print(f"Book '{book.book_title}' added successfully.")
+        else:
+            print("Author not found. Add the author first.")
 
-# Borrow some books
-u1.borrow_book(b1)
-u1.borrow_book(b3)
-u2.borrow_book(b2)
+    elif choice == "3":
+        user = User()
+        user.add_user()
+        users[user.userID] = user
+        print(f"User '{user.userName}' added successfully.")
 
+    elif choice == "4":
+        user_id = input("Enter User ID: ")
+        book_id = input("Enter Book ID: ")
+        if user_id in users and book_id in books:
+            users[user_id].borrow_book(books[book_id])
+        else:
+            print("User or Book not found.")
 
-# Display info
-print("\n--- User Details ---")
-u1.display_user()
-u2.display_user()
+    elif choice == "5":
+        if authors:
+            for a in authors.values():
+                a.display_author()
+        else:
+            print("No authors available.")
+
+    elif choice == "6":
+        if books:
+            for b in books.values():
+                b.display_book()
+        else:
+            print("No books available.")
+
+    elif choice == "7":
+        if users:
+            for u in users.values():
+                u.display_user()
+        else:
+            print("No users available.")
+
+    elif choice == "8":
+        print("Exiting Library System.")
+        break
+
+    else:
+        print("Invalid choice. Try again.")
