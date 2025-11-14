@@ -38,7 +38,7 @@ def show(x):
         elif x == "Display":
             q1.displayQueue()
     except Exception as e:
-        label.config(text=f"Error: {e}")
+        label.config(text="There was an error")
 
 text_Box = Text(top, height=2, width=20)
 text_Box.place(x=130, y=50)
@@ -58,3 +58,4 @@ label.place(x=80, y=200)
 q1 = Queue()
 
 top.mainloop()
+
