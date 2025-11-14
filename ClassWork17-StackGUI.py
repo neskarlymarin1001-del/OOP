@@ -3,7 +3,7 @@ from tkinter import *
 
 top = Tk()
 top.geometry("400x400")
-top.title("Stack GUI")
+top.title("Stack")
 
 class Stack:
     def __init__(self):
@@ -17,17 +17,17 @@ class Stack:
         if len(self.element) > 0:
             self.element.pop()
         else:
-            output_label.config(text="Stack is empty")
+            label.config(text="Stack is empty")
 
     def displayStack(self):
         if len(self.element) == 0:
-            output_label.config(text="Stack is empty")
+            label.config(text="Stack is empty")
         else:
-            result = "Elements in Stack: "
+            r = "Stack: "
             for i in self.element:
-                 result = result + i + ", "
-            result = result[:-2]
-            output_label.config(text=result)
+                 result = r + i + ", "
+            r = r[:-2]
+            label.config(text=r)
 
 def show(x):
     try:
@@ -38,22 +38,22 @@ def show(x):
         elif x == "display":
             s1.displayStack()
     except Exception as e:
-        output_label.config(text=f"Error: {e}")
+        label.config(text=f"Error: {e}")
 
 text_Box = Text(top, height=2, width=20)
 text_Box.place(x=130, y=50)
 
-B1 = Button(top, text="Push", width=10, height=2, command=lambda: show("push"))
-B1.place(x=60, y=120)
+PushButton = Button(top, text="Push", width=10, height=2, command=lambda: show("push"))
+PushButton.place(x=60, y=120)
 
-B2 = Button(top, text="Pop", width=10, height=2, command=lambda: show("pop"))
-B2.place(x=160, y=120)
+PopButton = Button(top, text="Pop", width=10, height=2, command=lambda: show("pop"))
+PopButton.place(x=160, y=120)
 
-B3 = Button(top, text="Display", width=10, height=2, command=lambda: show("display"))
-B3.place(x=260, y=120)
+DisplayButton = Button(top, text="Display", width=10, height=2, command=lambda: show("display"))
+DisplayButton.place(x=260, y=120)
 
-output_label = Label(top, text="")
-output_label.place(x=70, y=200)
+label = Label(top, text="")
+label.place(x=80, y=200)
 
 s1 = Stack()
 
