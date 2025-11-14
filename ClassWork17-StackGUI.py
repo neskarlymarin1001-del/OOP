@@ -25,7 +25,7 @@ class Stack:
         else:
             r = "Stack: "
             for i in self.element:
-                 result = r + i + ", "
+                 r = r + i + ", "
             r = r[:-2]
             label.config(text=r)
 
@@ -58,3 +58,4 @@ label.place(x=80, y=200)
 s1 = Stack()
 
 top.mainloop()
+
